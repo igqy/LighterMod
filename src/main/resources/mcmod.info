@@ -1,0 +1,10 @@
+[
+{
+  "modid": "lighter",
+  "name": "Lighter",
+  "description": "Lighter, an item that can throw light sources",
+  "version": "0.0.6",
+  "mcversion": "${mcversion}",
+  "authorList": ["igqy"]
+}
+]
