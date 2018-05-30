@@ -17,6 +17,7 @@ public class Items {
 	@GameRegistry.ObjectHolder("lighter:itemfire")
 	public static ItemFire itemfire;
 	
+	
 	//Method to initialize the models of items. Called in ClientProxy.class
 	@SideOnly(Side.CLIENT)
 	public static void initModels() {

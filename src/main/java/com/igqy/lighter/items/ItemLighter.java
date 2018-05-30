@@ -1,5 +1,6 @@
 package com.igqy.lighter.items;
 
+
 import com.igqy.lighter.Lighter;
 import com.igqy.lighter.entity.EntityLightFromLighter;
 
@@ -108,15 +109,12 @@ public class ItemLighter extends Item {
         
 		if (!worldIn.isRemote)
         {
-			if (itemstack != ITEM_LIGHTER) {
-            	return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
-            }
         	if (playerIn.getHeldItem(handIn).getTagCompound().hasKey("off")) {
         		return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
         	} else if (!itemstack.getTagCompound().hasKey("off")){
         		worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_BLAZE_SHOOT, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
                 EntityLightFromLighter entitylighter = new EntityLightFromLighter(worldIn, playerIn);
-                entitylighter.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+                entitylighter.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.7F, 1.5F, 1.0F);
                 worldIn.spawnEntity(entitylighter);
         	}
         }
@@ -140,22 +138,18 @@ public class ItemLighter extends Item {
             	return EnumActionResult.FAIL;
             }
             
-            if (itemstack != ITEM_LIGHTER) {
-            	return EnumActionResult.FAIL;
-            }
-            
             if (worldIn.isAirBlock(pos) && itemstack.getTagCompound().hasKey("on"))
             {
                 worldIn.playSound(player, pos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.BLOCKS, 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
                 worldIn.setBlockState(pos, Blocks.FIRE.getDefaultState(), 11);
-                worldIn.setBlockState(pos.add(0,0,1), Blocks.FIRE.getDefaultState());
-                worldIn.setBlockState(pos.add(0,0,-1), Blocks.FIRE.getDefaultState());
-                worldIn.setBlockState(pos.add(1,0,0), Blocks.FIRE.getDefaultState());
-                worldIn.setBlockState(pos.add(-1,0,0), Blocks.FIRE.getDefaultState());
-                worldIn.setBlockState(pos.add(-1,0,-1), Blocks.FIRE.getDefaultState());
-                worldIn.setBlockState(pos.add(-1,0,1), Blocks.FIRE.getDefaultState());
-                worldIn.setBlockState(pos.add(1,0,1), Blocks.FIRE.getDefaultState());
-                worldIn.setBlockState(pos.add(1,0,-1), Blocks.FIRE.getDefaultState());
+                worldIn.setBlockState(pos.add(0,0,1), Blocks.FIRE.getDefaultState(), 11);
+                worldIn.setBlockState(pos.add(0,0,-1), Blocks.FIRE.getDefaultState(), 11);
+                worldIn.setBlockState(pos.add(1,0,0), Blocks.FIRE.getDefaultState(), 11);
+                worldIn.setBlockState(pos.add(-1,0,0), Blocks.FIRE.getDefaultState(), 11);
+                worldIn.setBlockState(pos.add(-1,0,-1), Blocks.FIRE.getDefaultState(), 11);
+                worldIn.setBlockState(pos.add(-1,0,1), Blocks.FIRE.getDefaultState(), 11);
+                worldIn.setBlockState(pos.add(1,0,1), Blocks.FIRE.getDefaultState(), 11);
+                worldIn.setBlockState(pos.add(1,0,-1), Blocks.FIRE.getDefaultState(), 11);
             }
 
             if (player instanceof EntityPlayerMP)

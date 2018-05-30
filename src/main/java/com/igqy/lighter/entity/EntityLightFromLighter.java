@@ -3,10 +3,13 @@ package com.igqy.lighter.entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
+//Creates an entity similar to a snowball that sets things on fire. Launched from the lighter item.
 public class EntityLightFromLighter extends EntitySnowball {
 	
     public EntityLightFromLighter(World worldIn)
@@ -28,22 +31,31 @@ public class EntityLightFromLighter extends EntitySnowball {
     {
         EntityThrowable.registerFixesThrowable(fixer, "Snowball");
     }
-
-    /**
-     * Called when this EntityThrowable hits a block or entity.
-     */
+    
+    //Allows the entity to be rendered on fire.
+    @Override
+    public boolean canRenderOnFire() {
+    	return true;
+    }
+    
+    //This is to define what happens when the entity hits a block or an entity.
     @Override
     protected void onImpact(RayTraceResult result)
     {
-        if (result.entityHit != null)
+        if (result.entityHit != null && !result.entityHit.isEntityEqual(thrower))
         {
             result.entityHit.setFire(10);
+            result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)5);
         }
 
         if (!this.world.isRemote)
         {
             this.world.setEntityState(this, (byte)3);
             this.setDead();
+        }
+        
+        if (result.entityHit == null) {
+        	this.world.setBlockState(getPosition(), Blocks.FIRE.getDefaultState(), 11);
         }
     }
 }

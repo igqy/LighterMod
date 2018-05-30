@@ -17,22 +17,24 @@ import com.igqy.lighter.network.PacketHandler;
 public class MainProxy {
 	
 	public void preInit(FMLPreInitializationEvent e) {
+		//Registers every packet handling or sending class.
 		PacketHandler.registerMessages("lighter");
 	}
 	public void init(FMLInitializationEvent e) {
+		//Registers Entities.class
 		Entities.register();
 	}
 	public void postInit(FMLPostInitializationEvent e) {
 	}
 	
-	//Registers every item. In this case, there is only one.
+	//Registers item classes so Forge recognizes them as part of the mod.
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event) {
 		event.getRegistry().register(new ItemLighter());
 		event.getRegistry().register(new ItemFire());
 	}
 	
-	//Registers every block. I kept this here because I don't know whether or not I want to add a block.
+	//Registers block classes. I kept this here because I don't know whether or not I want to add a block.
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
 

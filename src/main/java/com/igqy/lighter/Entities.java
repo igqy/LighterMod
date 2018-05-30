@@ -17,11 +17,15 @@ public class Entities {
 		registerEntities();
 	}
 
-	
+	//Registers the entity, so Forge recognizes it as one.
 	private static void registerEntities() {
-		EntityRegistry.registerModEntity(new ResourceLocation("fireprojectile"), EntityLightFromLighter.class, "projectile_fire", entityId++, Lighter.instance, 64, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation("itemfire"), EntityLightFromLighter.class, "projectile_fire", entityId++, Lighter.instance, 64, 1, true);
 	}
 
+	/* Don't really know what deprecated methods mean, but after suppressing the warning, the method seemed to work just fine.
+	 * 
+	 * Registers the renderer and which entity it should act upon.
+	 */
 	@SuppressWarnings("deprecation")
 	private static void registerRenders() {
 		RenderingRegistry.registerEntityRenderingHandler(EntityLightFromLighter.class, new RenderSnowball<EntityLightFromLighter>(Minecraft.getMinecraft().getRenderManager(), ItemFire.ITEM_FIRE, Minecraft.getMinecraft().getRenderItem()));
